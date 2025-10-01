@@ -12,7 +12,12 @@ def index():
 # @app.post('/')
 # def index2():
 #     return 'hi'
-@app.get('/blog/all' ,tags=['blogs'])
+@app.get('/blog/all' ,
+         tags=['blogs'], 
+         summary='Retrieving all blogs', 
+         description='This api cal simulates fetching all blogs',
+         response_description='This is the list of available blogs'
+         )
 def get_all_blogs():
     return {'message':'all blogs provided'}
 
@@ -22,6 +27,15 @@ def get_new_blog(page = 1, page_size=10):
 
 @app.get('/blog/{id}/comments/{comment_id}', tags=['comments'])
 def get_comment(id: int, comment_id: int, valid: bool = True, Username: Optional[str] = None):
+    """
+    simulates retrievimg a comment from a blog
+
+    - **id** mandatory path parameter
+    - **comment_id** mandatory path paramater
+    - **valid** optional query parameter
+    - **username** optional query parameter
+    """
+    
     return {'message':f'Blog id {id} , comment_id {comment_id}, valid {valid}, username {Username} '}
 
 class BlogType(str, Enum):
